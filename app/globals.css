@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default Monochrome Greek Statue World */
+  --bg: #0A0A0C;
+  --fg: #F2F2F0;
+  --fg-muted: #8E8E96;
+  --accent: #F5C542;
+  --accent-2: #E2A925;
+  --border-frame: rgba(255, 255, 255, 0.15);
+  --border-frame-active: rgba(245, 197, 66, 0.5);
+  --glow-accent: rgba(245, 197, 66, 0.25);
+  --halftone-opacity: 0.18;
+
+  /* Island 1 - Dune Desert */
+  --day1-bg: #120B07;
+  --day1-fg: #F8EFE6;
+  --day1-accent: #E07A2E;
+  --day1-accent-2: #418080;
+  --day1-border: rgba(224, 122, 46, 0.3);
+
+  /* Island 2 - Synthwave Cyberpunk */
+  --day2-bg: #090414;
+  --day2-fg: #FBF2FF;
+  --day2-accent: #FF2E93;
+  --day2-accent-2: #8A2BE2;
+  --day2-border: rgba(255, 46, 147, 0.3);
+
+  /* Island 3 - Carnival Night */
+  --day3-bg: #061214;
+  --day3-fg: #FFF8E7;
+  --day3-accent: #FFB703;
+  --day3-accent-2: #E63946;
+  --day3-border: rgba(255, 183, 3, 0.3);
+
+  /* Hack2Future - Deep Space */
+  --h2f-bg: #04060B;
+  --h2f-fg: #F0F4F8;
+  --h2f-accent: #38BDF8;
+  --h2f-accent-2: #F5C542;
+  --h2f-border: rgba(56, 189, 248, 0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--bg);
+  color: var(--fg);
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  color: var(--fg);
+  overflow-x: hidden;
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0A0A0C;
+}
+
+/* Halftone Dot Matrix Background Utility */
+.halftone-bg {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: 0 0;
+}
+
+.halftone-dense {
+  background-image: radial-gradient(circle, currentColor 1.2px, transparent 1.2px);
+  background-size: 10px 10px;
+}
+
+/* Editorial 1px Thin Frame Layout Device */
+.editorial-frame {
+  position: relative;
+  border: 1px solid var(--border-frame);
+  background: rgba(10, 10, 12, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.editorial-frame:hover {
+  border-color: var(--border-frame-active);
+  box-shadow: 0 0 25px -5px var(--glow-accent);
+}
+
+/* Frame Corner Marks */
+.editorial-frame::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  pointer-events: none;
+}
+
+.editorial-frame::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  pointer-events: none;
+}
+
+/* Yellow Glitch Bar Animation */
+@keyframes glitch-horizontal {
+  0% { transform: translateX(0) scaleY(1); }
+  20% { transform: translateX(-4px) scaleY(1.1); }
+  40% { transform: translateX(5px) scaleY(0.9); }
+  60% { transform: translateX(-2px) scaleY(1.05); }
+  80% { transform: translateX(3px) scaleY(0.95); }
+  100% { transform: translateX(0) scaleY(1); }
+}
+
+.animate-glitch-bar {
+  animation: glitch-horizontal 3.5s infinite ease-in-out;
+}
+
+/* Statue Slice Float Animation */
+@keyframes statue-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-statue-bob {
+  animation: statue-bob 6s infinite ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 197, 66, 0.35);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
