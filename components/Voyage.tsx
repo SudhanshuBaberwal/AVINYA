@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ISLANDS } from '@/data/content';
 import Island from './Island';
 import Boat from './Boat';
-import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { gsap } from '@/lib/gsap';
 
 export default function Voyage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,6 +12,8 @@ export default function Voyage() {
   const boatRef = useRef<HTMLDivElement>(null);
   const [activeIslandIndex, setActiveIslandIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+
+  const activeIdxRef = useRef(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -23,7 +25,6 @@ export default function Voyage() {
   }, []);
 
   useEffect(() => {
-    // If mobile or reduced motion, simple vertical stacked layout without pinning
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (isMobile || prefersReducedMotion) return;
 
@@ -34,6 +35,16 @@ export default function Voyage() {
 
     const pathLength = path.getTotalLength();
 
+    // Pre-calculate 250 sampled points along the curve once to eliminate CPU-heavy getPointAtLength calls during scroll
+    const SAMPLES = 250;
+    const pointsTable = Array.from({ length: SAMPLES }, (_, i) => {
+      const t = i / (SAMPLES - 1);
+      const pt = path.getPointAtLength(t * pathLength);
+      const nextPt = path.getPointAtLength(Math.min(pathLength, (t + 0.005) * pathLength));
+      const angle = (Math.atan2(nextPt.y - pt.y, nextPt.x - pt.x) * 180) / Math.PI;
+      return { x: pt.x, y: pt.y, angle };
+    });
+
     // GSAP ScrollTrigger timeline pinning the Voyage container
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -41,33 +52,30 @@ export default function Voyage() {
           trigger: container,
           start: 'top top',
           end: '+=300%',
-          scrub: 0.8,
+          scrub: 0.25,
           pin: true,
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
 
-            // Compute point along SVG sea route
-            const point = path.getPointAtLength(p * pathLength);
-            // Tangent angle for boat orientation
-            const nextPoint = path.getPointAtLength(Math.min(pathLength, (p + 0.01) * pathLength));
-            const angle = (Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * 180) / Math.PI;
+            // Instant lookup from precomputed points (0ms overhead)
+            const idx = Math.min(SAMPLES - 1, Math.max(0, Math.round(p * (SAMPLES - 1))));
+            const s = pointsTable[idx];
 
-            // Move boat along the curve
+            // Move boat along the curve with GPU acceleration
             gsap.set(boat, {
-              x: point.x,
-              y: point.y,
-              rotation: angle,
+              x: s.x,
+              y: s.y,
+              rotation: s.angle,
               transformOrigin: '50% 50%',
+              force3D: true,
             });
 
-            // Smooth cross-fade between the 3 island layers
-            if (p < 0.33) {
-              setActiveIslandIndex(0);
-            } else if (p < 0.66) {
-              setActiveIslandIndex(1);
-            } else {
-              setActiveIslandIndex(2);
+            // Smooth cross-fade between the 3 island layers (only update state when changed!)
+            const nextIdx = p < 0.33 ? 0 : p < 0.66 ? 1 : 2;
+            if (activeIdxRef.current !== nextIdx) {
+              activeIdxRef.current = nextIdx;
+              setActiveIslandIndex(nextIdx);
             }
           },
         },
@@ -105,21 +113,18 @@ export default function Voyage() {
           ref={containerRef}
           className="relative h-[100svh] w-full overflow-hidden"
         >
-          {/* Layered Island Slides */}
+          {/* Layered Island Slides with GPU Accelerated Crossfade */}
           <div className="absolute inset-0">
             {ISLANDS.map((island, index) => {
               const isActive = activeIslandIndex === index;
               return (
                 <div
                   key={island.slug}
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  className={`absolute inset-0 transition-opacity duration-700 ease-out ${
                     isActive ? 'opacity-100 pointer-events-auto z-10' : 'opacity-0 pointer-events-none z-0'
                   }`}
                   style={{
-                    clipPath: isActive
-                      ? 'circle(150% at 50% 50%)'
-                      : 'circle(0% at 50% 50%)',
-                    transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease',
+                    willChange: 'opacity',
                   }}
                 >
                   <Island island={island} isActive={isActive} />

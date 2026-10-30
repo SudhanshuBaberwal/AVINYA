@@ -99,7 +99,7 @@ export default function Boat({
           r="8"
           fill={lanternColor}
           opacity="0.35"
-          className="animate-ping"
+          className="animate-pulse"
         />
         <circle
           cx="94"

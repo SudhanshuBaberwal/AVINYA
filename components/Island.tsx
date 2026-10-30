@@ -49,38 +49,38 @@ export default function Island({
           fill
           priority={island.dayNumber === 1}
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.45] contrast-125 scale-105 transition-transform duration-1000 ease-out"
+          className="object-cover object-center scale-105"
         />
         {/* Dark Vignette & Halftone Mask */}
+        <div className="absolute inset-0 bg-[#0A0A0C]/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-[#0A0A0C]/80" />
         <div className="absolute inset-0 halftone-bg opacity-15 pointer-events-none text-white" />
       </div>
 
-      {/* Layer 2: Atmospheric Color Wash & Lighting Spill */}
+      {/* Layer 2: Atmospheric Color Wash & Lighting Spill (Hardware Accelerated) */}
       <div
-        className="absolute inset-0 -z-20 pointer-events-none opacity-40 mix-blend-color"
+        className="absolute inset-0 -z-20 pointer-events-none opacity-30"
         style={{
           background: `radial-gradient(circle at 60% 40%, ${island.palette.accent} 0%, transparent 70%)`,
         }}
       />
 
-      {/* Layer 3: Particle Atmosphere specific to each island */}
+      {/* Layer 3: Particle Atmosphere specific to each island (GPU Friendly) */}
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         {island.dayNumber === 1 && (
           /* Day 1: Dune Ember & Sand Shimmer */
-          <div className="absolute inset-0 opacity-70">
-            {[...Array(18)].map((_, i) => (
+          <div className="absolute inset-0 opacity-60">
+            {[...Array(8)].map((_, i) => (
               <span
                 key={i}
-                className="absolute rounded-full bg-[#E07A2E] animate-ping"
+                className="absolute rounded-full bg-[#E07A2E] animate-pulse"
                 style={{
-                  top: `${15 + (i * 17) % 70}%`,
-                  left: `${(i * 23) % 95}%`,
-                  width: `${2 + (i % 3) * 2}px`,
-                  height: `${2 + (i % 3) * 2}px`,
-                  animationDuration: `${3 + (i % 4)}s`,
-                  animationDelay: `${(i * 0.4)}s`,
-                  boxShadow: '0 0 10px #E07A2E',
+                  top: `${20 + (i * 19) % 65}%`,
+                  left: `${(i * 27) % 92}%`,
+                  width: `${3 + (i % 2) * 2}px`,
+                  height: `${3 + (i % 2) * 2}px`,
+                  animationDuration: `${2.5 + (i % 3)}s`,
+                  animationDelay: `${i * 0.35}s`,
                 }}
               />
             ))}
@@ -89,18 +89,17 @@ export default function Island({
 
         {island.dayNumber === 2 && (
           /* Day 2: Cyberpunk Neon Rain & Grid Glow */
-          <div className="absolute inset-0 opacity-60">
+          <div className="absolute inset-0 opacity-50">
             <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#FF2E93]/20 to-transparent" />
-            {[...Array(15)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <div
                 key={i}
                 className="absolute w-[1px] bg-gradient-to-b from-transparent via-[#FF2E93] to-transparent animate-pulse"
                 style={{
-                  top: `${(i * 13) % 80}%`,
-                  left: `${(i * 19) % 98}%`,
-                  height: `${40 + (i % 5) * 30}px`,
-                  animationDuration: `${1.5 + (i % 3)}s`,
-                  boxShadow: '0 0 8px #FF2E93',
+                  top: `${(i * 15) % 75}%`,
+                  left: `${(i * 23) % 95}%`,
+                  height: `${35 + (i % 4) * 25}px`,
+                  animationDuration: `${2 + (i % 2)}s`,
                 }}
               />
             ))}
@@ -109,19 +108,18 @@ export default function Island({
 
         {island.dayNumber === 3 && (
           /* Day 3: Carnival Golden Lanterns Floating */
-          <div className="absolute inset-0 opacity-75">
-            {[...Array(16)].map((_, i) => (
+          <div className="absolute inset-0 opacity-60">
+            {[...Array(8)].map((_, i) => (
               <div
                 key={i}
                 className="absolute rounded-full bg-[#FFB703] blur-[1px] animate-statue-bob"
                 style={{
-                  top: `${10 + (i * 19) % 75}%`,
-                  left: `${(i * 21) % 92}%`,
-                  width: `${5 + (i % 4) * 3}px`,
-                  height: `${7 + (i % 4) * 4}px`,
-                  animationDuration: `${4 + (i % 3) * 2}s`,
-                  animationDelay: `${i * 0.3}s`,
-                  boxShadow: '0 0 16px #FFB703, 0 0 30px #E63946',
+                  top: `${15 + (i * 21) % 70}%`,
+                  left: `${(i * 25) % 90}%`,
+                  width: `${5 + (i % 3) * 2}px`,
+                  height: `${7 + (i % 3) * 3}px`,
+                  animationDuration: `${4 + (i % 2) * 2}s`,
+                  animationDelay: `${i * 0.4}s`,
                 }}
               />
             ))}

@@ -1,0 +1,116 @@
+/* OptionWheel.css - ReactBits curved interactive spinning wheel picker */
+.option-wheel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  overscroll-behavior: contain;
+  cursor: grab;
+  outline: none;
+  perspective: 1000px;
+}
+
+.option-wheel-container:active {
+  cursor: grabbing;
+}
+
+/* Vertical indicator line and center reticle */
+.option-wheel-reticle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option-wheel-reticle--left {
+  left: 20px;
+}
+
+.option-wheel-reticle--right {
+  right: 20px;
+  flex-direction: row-reverse;
+}
+
+.option-wheel-reticle-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--accent, #38bdf8);
+}
+
+.option-wheel-reticle--right .option-wheel-reticle-arrow {
+  border-left: none;
+  border-right: 8px solid var(--accent, #38bdf8);
+}
+
+.option-wheel-reticle-line {
+  height: 1px;
+  width: 32px;
+  background: linear-gradient(to right, var(--accent, #38bdf8), transparent);
+}
+
+.option-wheel-reticle--right .option-wheel-reticle-line {
+  background: linear-gradient(to left, var(--accent, #38bdf8), transparent);
+}
+
+/* Stage & Items */
+.option-wheel-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.option-wheel-item {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  white-space: nowrap;
+  max-width: calc(100% - 60px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono), monospace;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  transform-origin: left center;
+  will-change: transform, opacity, filter, color;
+  transition: color 0.15s ease;
+  cursor: pointer;
+  padding: 4px 12px;
+}
+
+.option-wheel-item:hover {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Top and bottom gradient fade masks */
+.option-wheel-fade-top,
+.option-wheel-fade-bottom {
+  position: absolute;
+  inset-x: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.option-wheel-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, #0a0a0c 10%, rgba(10, 10, 12, 0) 100%);
+}
+
+.option-wheel-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, #0a0a0c 10%, rgba(10, 10, 12, 0) 100%);
+}

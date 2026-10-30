@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import StatueSlices from './StatueSlices';
-import VectorText from './VectorText';
+import TechText from './TechText';
 import { useLenis } from '@/lib/lenis';
 import { ArrowDown, Anchor } from 'lucide-react';
 import { FEST_METADATA } from '@/data/content';
@@ -52,11 +52,41 @@ export default function Hero() {
             <span>THE ANNUAL VOYAGE BEGINS</span>
           </div>
 
-          <VectorText
-            text="AVINYA"
-            size="hero"
-            subtext="12 · 13 · 14 MARCH 2027 — IIIT DHARWAD"
-          />
+          <div style={{ width: '100%', height: '480px', position: 'relative' }} className="max-w-2xl max-h-[55vh] sm:max-h-none -my-8 sm:-my-4">
+            <TechText
+              text="AVINYA"
+              fontWeight={600}
+              fontSize={150}
+              reveal="letter"
+              dashLength={4}
+              dashGap={2}
+              specks={15}
+              intro="none"
+              introDuration={2}
+              clickKick
+              guides={false}
+              fontFamily=""
+              letterSpacing={-0.05}
+              accentColor="currentColor"
+              reach={200}
+              softness={0.7}
+              lineStyle="dashed"
+              strokeWidth={1.5}
+              speed={1}
+              bounce={0.4}
+              selection
+              labels
+              color="currentColor"
+              align="center"
+              draggable
+              sweep
+            />
+          </div>
+
+          <div className="mt-2 flex items-center justify-between border-t border-white/15 pt-1.5 font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[var(--accent)] uppercase w-full max-w-2xl">
+            <span>12 · 13 · 14 MARCH 2027 — IIIT DHARWAD</span>
+            <span className="text-white/40 tracking-normal text-[9px] hidden sm:inline">OFFICIAL VOYAGE ARCHIVE</span>
+          </div>
 
           <p className="mt-6 max-w-xl font-serif text-lg sm:text-2xl italic leading-relaxed text-neutral-300">
             A three-day odyssey across uncharted archipelagos. Slicing through antiquity, 

@@ -9,6 +9,8 @@ export interface EventItem {
   description: string;
   highlight?: boolean;
   tagline?: string;
+  format?: string;
+  timeSlot?: 'Morning' | 'Afternoon' | 'Twilight & Night';
 }
 
 export const FEST_EVENTS: EventItem[] = [
@@ -23,7 +25,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: '260 Seater Audi',
     description: 'A fast-paced 3v3 competitive programming showdown featuring a standard qualification round followed by a relay-style knockout where every accepted submission forces a coder switch.',
     highlight: true,
-    tagline: '3v3 relay competitive code arena'
+    tagline: '3v3 relay competitive code arena',
+    format: '3v3 Relay Knockout',
+    timeSlot: 'Morning'
   },
   {
     id: 'photography-contest',
@@ -34,7 +38,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '10:00 AM – 12:00 PM',
     venue: 'PI Block (Backside)',
     description: 'Participants capture creative photographs based on a surprise fest theme revealed right at the start. Evaluated on composition, narrative, and artistic vision.',
-    highlight: false
+    highlight: false,
+    format: 'Solo Creative',
+    timeSlot: 'Morning'
   },
   {
     id: 'ai-arcade',
@@ -46,7 +52,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: '260 Seater Hall',
     description: 'A two-stage competitive AI challenge in teams of two. Stage 1: Visual Reverse-Prompting & Logical Constraint Bypass. Stage 2: Time-bound RAG Treasure Hunt querying curated knowledge vaults.',
     highlight: true,
-    tagline: 'Prompt engineering & RAG treasure hunt'
+    tagline: 'Prompt engineering & RAG treasure hunt',
+    format: 'Teams of 2 (Prompt + RAG)',
+    timeSlot: 'Morning'
   },
   {
     id: 'drama-competition',
@@ -57,7 +65,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '11:00 AM – 1:00 PM',
     venue: '260 Seater',
     description: 'Inter-college theatrical stage performances judged on dramatic intensity, storytelling, stage presence, and voice projection.',
-    highlight: false
+    highlight: false,
+    format: 'Inter-College Troupe',
+    timeSlot: 'Morning'
   },
   {
     id: 'monopoly',
@@ -69,7 +79,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Incubation Hall',
     description: 'Stock-market simulation where 30 teams of 3–4 members compete to grow ₹1,00,000 virtual capital across 8 companies through 12 dynamic market news cycles and quiz rounds.',
     highlight: true,
-    tagline: 'High-stakes capital trading simulation'
+    tagline: 'High-stakes capital trading simulation',
+    format: 'Teams of 3–4 (₹1L Virtual Capital)',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'music-competition',
@@ -80,7 +92,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '2:00 PM – 5:00 PM',
     venue: '120 Seater',
     description: 'Solo and band acoustic & electric musical showcases across multiple genres evaluated by an esteemed panel of classical and contemporary judges.',
-    highlight: false
+    highlight: false,
+    format: 'Solo & Acoustic Band',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'just-a-minute',
@@ -91,7 +105,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '2:00 PM – 5:00 PM',
     venue: '120 Seater Audi',
     description: 'The legendary fast-paced speaking game where speakers hold the floor on random impromptu topics for 60 seconds without hesitation, repetition, or deviation.',
-    highlight: false
+    highlight: false,
+    format: 'Solo Speaking Trial',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'treasure-hunt',
@@ -102,7 +118,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '3:00 PM – 5:00 PM',
     venue: 'Entire Campus',
     description: 'Cryptic riddles, physical checkpoint trials, and geo-encoded puzzles scattered across the campus grounds leading to the grand secret chest.',
-    highlight: false
+    highlight: false,
+    format: 'Campus Squads',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'opening-ceremony',
@@ -114,7 +132,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Front Gate E-Block',
     description: 'Official inaugural lamp lighting of Avinya 2027 followed by headline guest performances, student dance troupes, and an electric night launch.',
     highlight: true,
-    tagline: 'The grand unveiling of Avinya 2027'
+    tagline: 'The grand unveiling of Avinya 2027',
+    format: 'Inaugural Showcase',
+    timeSlot: 'Twilight & Night'
   },
 
   // DAY 2 - THE PANDEMONIUM
@@ -128,7 +148,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Incubation Hall / 260 Seater',
     description: 'Design a hardware module to generate QFT gate sequences, connect it via Qiskit, and execute the resulting circuits on real IBM Quantum hardware in a 6-hour hackathon.',
     highlight: true,
-    tagline: 'FPGA meets real IBM Quantum hardware'
+    tagline: 'FPGA meets real IBM Quantum hardware',
+    format: 'Hardware Hackathon (Qiskit + IBM Q)',
+    timeSlot: 'Morning'
   },
   {
     id: 'mega-rush-2',
@@ -140,7 +162,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Labs L405-L407 & 240 Seater',
     description: 'Campus-wide LAN tournament featuring tactical shooters, battle royales, and fighting games with live shoutcasting on stadium screens.',
     highlight: true,
-    tagline: 'High-octane collegiate esports championship'
+    tagline: 'High-octane collegiate esports championship',
+    format: 'Multi-Lab LAN Tournament',
+    timeSlot: 'Morning'
   },
   {
     id: 'build-with-gemma',
@@ -152,7 +176,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Both 260 Seaters',
     description: 'A 6-hour autonomous agent competition powered by Google Gemma. Build reasoning multi-agent workflows with tool-calling capabilities and UI interfaces.',
     highlight: true,
-    tagline: 'Autonomous AI agents powered by Gemma'
+    tagline: 'Autonomous AI agents powered by Gemma',
+    format: '6-Hour Agentic AI Challenge',
+    timeSlot: 'Morning'
   },
   {
     id: 'solo-duet-dance',
@@ -163,7 +189,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '10:00 AM – 1:00 PM',
     venue: 'M Block Courtyard',
     description: 'Choreographed solo and partner showdowns encompassing hip-hop, contemporary, locking, and classical fusion.',
-    highlight: false
+    highlight: false,
+    format: 'Solo & Partner Showdown',
+    timeSlot: 'Morning'
   },
   {
     id: 'standup-comedy',
@@ -174,7 +202,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '11:00 AM – 12:30 PM',
     venue: 'Ground Amphitheatre',
     description: 'An open-air comedy special with observational campus humour, sharp punchlines, and crowd-work by top comedic talent.',
-    highlight: false
+    highlight: false,
+    format: 'Open Air Special',
+    timeSlot: 'Morning'
   },
   {
     id: 'debate-competition',
@@ -185,7 +215,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '2:00 PM – 5:00 PM',
     venue: '240 Seater',
     description: 'Collegiate teams clash over contemporary geopolitical, technological, and ethical motions in an Oxford-style parliamentary format.',
-    highlight: false
+    highlight: false,
+    format: 'Oxford Parliamentary',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'tote-bag-painting',
@@ -196,7 +228,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '2:00 PM – 5:00 PM',
     venue: '2 x 120 Seaters',
     description: 'Expressive textile art jam where participants design and take home custom-painted canvas tote bags with acrylic dyes and stencils.',
-    highlight: false
+    highlight: false,
+    format: 'Open Textile Art Jam',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'group-dance',
@@ -208,7 +242,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Main Ground Stage',
     description: 'High-energy synchronization battles between collegiate crews featuring thematic narratives, stunt formations, and lighting synchronization.',
     highlight: true,
-    tagline: 'Inter-collegiate crew choreography battles'
+    tagline: 'Inter-collegiate crew choreography battles',
+    format: 'Collegiate Crew Battle',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'battle-of-bands',
@@ -220,7 +256,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Main Ground Stage',
     description: 'College rock, metal, fusion, and indie bands electrify the main arena with original compositions and thunderous covers.',
     highlight: true,
-    tagline: 'Amplified rock & fusion concert showdown'
+    tagline: 'Amplified rock & fusion concert showdown',
+    format: 'Live Amplified Rock Battle',
+    timeSlot: 'Twilight & Night'
   },
 
   // DAY 3 - THE CARNIVAL ISLAND
@@ -234,7 +272,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: '120 Seater',
     description: 'Grand Linux Festival featuring a Linux User Meetup, custom desktop rice showcase, kernel driver teardowns, and a rapid troubleshooting mini-hackathon.',
     highlight: true,
-    tagline: 'Desktop ricing, kernel hacking & open source'
+    tagline: 'Desktop ricing, kernel hacking & open source',
+    format: 'Linux Fest & Rice Hackathon',
+    timeSlot: 'Morning'
   },
   {
     id: 'quiz-quest',
@@ -245,7 +285,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '10:00 AM – 12:00 PM',
     venue: '120 Seater',
     description: 'General knowledge, tech trivia, pop culture, and cryptic visual connect rounds for sharp collegiate minds.',
-    highlight: false
+    highlight: false,
+    format: 'Teams of 2 (Trivia & Tech)',
+    timeSlot: 'Morning'
   },
   {
     id: 'street-play',
@@ -256,7 +298,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '11:00 AM – 1:00 PM',
     venue: 'Main Ground Arena',
     description: 'Powerful acoustic street performances tackling pertinent societal themes with rhythmic percussion, slogans, and raw dramatic movement.',
-    highlight: false
+    highlight: false,
+    format: 'Nukkad Natak Troupe',
+    timeSlot: 'Morning'
   },
   {
     id: 'fashion-show',
@@ -268,7 +312,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Main Ground Stage',
     description: 'Avant-garde styling, custom student-designed haute couture, and dramatic choreography exploring myth, futurism, and classical aesthetics.',
     highlight: true,
-    tagline: 'Avant-garde runway fashion show'
+    tagline: 'Avant-garde runway fashion show',
+    format: 'Themed Haute Couture Runway',
+    timeSlot: 'Afternoon'
   },
   {
     id: 'closing-ceremony',
@@ -279,7 +325,9 @@ export const FEST_EVENTS: EventItem[] = [
     time: '7:30 PM – 9:00 PM',
     venue: 'Main Ground',
     description: 'Felicitation of winners across 20+ competitions, awarding of championship trophies, and emotional finale address.',
-    highlight: false
+    highlight: false,
+    format: 'Grand Awards & Felicitation',
+    timeSlot: 'Twilight & Night'
   },
   {
     id: 'dj-night',
@@ -291,7 +339,9 @@ export const FEST_EVENTS: EventItem[] = [
     venue: 'Main Ground Stage',
     description: 'High-energy electronic dance music spectacle featuring visual projection mapping, bass drops, and open-air celebration under the stars.',
     highlight: true,
-    tagline: 'The ultimate closing EDM celebration'
+    tagline: 'The ultimate closing EDM celebration',
+    format: 'Electronic Dance Spectacle',
+    timeSlot: 'Twilight & Night'
   }
 ];
 

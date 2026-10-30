@@ -87,18 +87,16 @@ export default function Cursor() {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300 ${
-        hidden ? 'opacity-0' : 'opacity-100'
-      }`}
+      className={`pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300 ${hidden ? 'opacity-0' : 'opacity-100'
+        }`}
     >
       {/* Outer follow ring */}
       <div
         ref={cursorRingRef}
-        className={`fixed top-0 left-0 rounded-full border border-[var(--accent)] pointer-events-none transition-[width,height,background-color,border-color,opacity] duration-200 ease-out ${
-          hovered
-            ? 'h-12 w-12 bg-[var(--accent)]/15 border-opacity-80'
-            : 'h-8 w-8 bg-transparent border-opacity-40'
-        }`}
+        className={`fixed top-0 left-0 rounded-full border border-[var(--accent)] pointer-events-none transition-all duration-200 ease-out ${hovered
+            ? 'h-12 w-12 bg-[var(--accent)]/15 scale-125 border-opacity-80'
+            : 'h-8 w-8 bg-transparent scale-100 border-opacity-40'
+          }`}
         style={{ willChange: 'transform' }}
       />
       {/* Center glowing lantern pip */}
